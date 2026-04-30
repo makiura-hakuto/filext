@@ -1,5 +1,8 @@
 # filext
 
+[![build](https://github.com/makiura-hakuto/filext/actions/workflows/build.yaml/badge.svg)](https://github.com/makiura-hakuto/filext/actions/workflows/build.yaml)
+[![coverage status](https://coveralls.io/repos/github/makiura-hakuto/filext/badge.svg?branch=main)](https://coveralls.io/github/makiura-hakuto/filext?branch=main)
+
 ディレクトリ内のファイルを拡張子ごとに集計するCLIツール
 
 ## Overview
