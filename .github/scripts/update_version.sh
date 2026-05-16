@@ -2,4 +2,5 @@
 
 TO_VERSION=$1
 
-sed -i '' "s/^version = \".*\"/version = \"$TO_VERSION\"/" Cargo.toml
+sed "s/^version = \".*\"/version = \"$TO_VERSION\"/" Cargo.toml > Cargo.toml.tmp
+mv Cargo.toml.tmp Cargo.toml
