@@ -1,0 +1,7 @@
+baseURL = 'https://makiura-hakuto.github.io/filext/'
+locale = 'ja'
+title = 'filext'
+theme = 'github.com/adityatelange/hugo-PaperMod'
+
+[params]
+  description = 'ディレクトリ内のファイルを拡張子ごとに集計するCLIツール'
