@@ -12,12 +12,14 @@ fn count_extensions(path: &str) -> io::Result<HashMap<String, usize>> {
         let entry = entry?;
         let path = entry.path();
 
-        if path.is_file() {
-            if let Some(ext) = path.extension() {
-                let ext = ext.to_string_lossy().to_string();
-
-                *counts.entry(ext).or_insert(0) += 1;
-            }
+        if !path.is_file() {
+            continue;
+        }
+        
+        if let Some(ext) = path.extension() {
+            let ext = ext.to_string_lossy().to_string();
+        
+            *counts.entry(ext).or_insert(0) += 1;
         }
     }
 
