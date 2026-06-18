@@ -35,8 +35,40 @@ fn print_counts(counts: &HashMap<String, (usize, u64)>) {
     }
 }
 
+fn print_help() {
+    println!("filext");
+    println!();
+    println!("Usage:");
+    println!("  filext [PATH]");
+    println!();
+    println!("Arguments:");
+    println!("  PATH    集計対象のディレクトリ（省略時はカレントディレクトリ）");
+    println!();
+    println!("Options:");
+    println!("  -h, --help       ヘルプを表示する");
+    println!("  -V, --version    バージョン情報を表示する");
+}
+
+fn print_version() {
+    println!("filext {}", env!("CARGO_PKG_VERSION"));
+}
+
 fn main() {
     let args: Vec<String> = env::args().collect();
+
+    if args.len() > 1 {
+        match args[1].as_str() {
+            "-h" | "--help" => {
+                print_help();
+                return;
+            }
+            "-V" | "--version" => {
+                print_version();
+                return;
+            }
+            _ => {}
+        }
+    }
 
     let target_dir = if args.len() > 1 {
         &args[1]
