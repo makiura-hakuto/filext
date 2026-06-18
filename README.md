@@ -2,6 +2,9 @@
 
 [![build](https://github.com/makiura-hakuto/filext/actions/workflows/build.yaml/badge.svg)](https://github.com/makiura-hakuto/filext/actions/workflows/build.yaml)
 [![coverage status](https://coveralls.io/repos/github/makiura-hakuto/filext/badge.svg?branch=main)](https://coveralls.io/github/makiura-hakuto/filext?branch=main)
+![license](https://img.shields.io/github/license/makiura-hakuto/filext)
+![language](https://img.shields.io/github/languages/top/makiura-hakuto/filext)
+![last commit](https://img.shields.io/github/last-commit/makiura-hakuto/filext)
 
 ディレクトリ内のファイルを拡張子ごとに集計するCLIツール
 
