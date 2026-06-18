@@ -3,7 +3,7 @@ use std::env;
 use std::fs;
 use std::io;
 
-fn count_extensions(path: &str) -> io::Result<HashMap<String, usize>> {
+fn count_extensions(path: &str) -> io::Result<HashMap<String, (usize, u64)>> {
     let mut counts = HashMap::new();
 
     let entries = fs::read_dir(path)?;
@@ -15,20 +15,23 @@ fn count_extensions(path: &str) -> io::Result<HashMap<String, usize>> {
         if !path.is_file() {
             continue;
         }
-        
+
         if let Some(ext) = path.extension() {
             let ext = ext.to_string_lossy().to_string();
-        
-            *counts.entry(ext).or_insert(0) += 1;
+            let size = fs::metadata(&path)?.len();
+
+            let entry = counts.entry(ext).or_insert((0, 0));
+            entry.0 += 1;
+            entry.1 += size;
         }
     }
 
     Ok(counts)
 }
 
-fn print_counts(counts: &HashMap<String, usize>) {
-    for (ext, count) in counts {
-        println!("{}: {} files", ext, count);
+fn print_counts(counts: &HashMap<String, (usize, u64)>) {
+    for (ext, (count, size)) in counts {
+        println!("{}: {} files, {} bytes", ext, count, size);
     }
 }
 
