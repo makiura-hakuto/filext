@@ -1,8 +1,15 @@
+//! filext
+//!
+//! ディレクトリ内のファイルを拡張子ごとに集計するCLIツール。
 use std::collections::HashMap;
 use std::env;
 use std::fs;
 use std::io;
 
+
+/// 指定されたディレクトリ内のファイルを拡張子ごとに集計する。
+///
+/// 戻り値は、拡張子をキー、ファイル数と合計サイズを値とするHashMapである。
 fn count_extensions(path: &str) -> io::Result<HashMap<String, (usize, u64)>> {
     let mut counts = HashMap::new();
 
@@ -29,12 +36,14 @@ fn count_extensions(path: &str) -> io::Result<HashMap<String, (usize, u64)>> {
     Ok(counts)
 }
 
+/// 拡張子ごとの集計結果を標準出力に表示する。
 fn print_counts(counts: &HashMap<String, (usize, u64)>) {
     for (ext, (count, size)) in counts {
         println!("{}: {} files, {} bytes", ext, count, size);
     }
 }
 
+/// ヘルプメッセージを標準出力に表示する。
 fn print_help() {
     println!("filext");
     println!();
@@ -49,10 +58,12 @@ fn print_help() {
     println!("  -V, --version    バージョン情報を表示する");
 }
 
+/// バージョン情報を標準出力に表示する。
 fn print_version() {
     println!("filext {}", env!("CARGO_PKG_VERSION"));
 }
 
+/// コマンドライン引数を解析し、集計処理を実行する。
 fn main() {
     let args: Vec<String> = env::args().collect();
 
@@ -91,5 +102,12 @@ mod tests {
         let result = count_extensions(".");
 
         assert!(result.is_ok());
+    }
+
+    #[test]
+    fn test_invalid_directory() {
+        let result = count_extensions("this_directory_does_not_exist");
+
+        assert!(result.is_err());
     }
 }
